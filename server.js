@@ -360,6 +360,27 @@ app.delete("/comments/:id", auth, async (req, res) => {
 
 
 // ======================
+// ROOT ENDPOINT
+// ======================
+app.get("/", (req, res) => {
+  res.send("Backend API is running...");
+});
+
+// ======================
+// OPTIONAL: Initialize server (tidak merusak listen)
+// ======================
+async function initServer() {
+  try {
+    await pool.query("SELECT NOW()");
+    console.log("Database connected successfully");
+  } catch (err) {
+    console.error("Database initialization failed:", err);
+  }
+}
+
+initServer();
+
+// ======================
 // RUN SERVER
 // ======================
 app.listen(process.env.PORT || 4000, () =>
