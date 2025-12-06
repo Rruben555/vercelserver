@@ -49,6 +49,13 @@ function auth(req, res, next) {
   }
 }
 
+// ======================
+// ROOT ENDPOINT
+// ======================
+app.get("/", (req, res) => {
+  res.send("Backend API is running...");
+});
+
 
 
 // ======================
@@ -358,27 +365,11 @@ app.delete("/comments/:id", auth, async (req, res) => {
   }
 });
 
-
-// ======================
-// ROOT ENDPOINT
-// ======================
-app.get("/", (req, res) => {
-  res.send("Backend API is running...");
-});
-
 // ======================
 // OPTIONAL: Initialize server (tidak merusak listen)
 // ======================
-async function initServer() {
-  try {
-    await pool.query("SELECT NOW()");
-    console.log("Database connected successfully");
-  } catch (err) {
-    console.error("Database initialization failed:", err);
-  }
-}
 
-initServer();
+module.exports = app;
 
 // ======================
 // RUN SERVER
@@ -386,4 +377,5 @@ initServer();
 // app.listen(process.env.PORT || 4000, () =>
 //   console.log("Server running...")
 // );
+
 
